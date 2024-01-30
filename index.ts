@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import "@fastify/multipart";
 
 const server = fastify();
 
@@ -13,7 +14,7 @@ server.post("/upload", async function (req, reply) {
     const data = await req.file();
 
     reply.status(200).send({
-      fileName: data.filename,
+      fileName: data?.file,
     });
   } catch (error) {
     reply.status(400).send("something went wrong");
